@@ -5,17 +5,19 @@ function useProduct() {
   const [products, setProduct] = useState([]);
 
   let getData = async () => {
-    const products = await axios.get('https://6461c1c2491f9402f4aa0565.mockapi.io/products')
-    setProduct(products.data)
-  }
+    const products = await axios.get(
+      "https://6461c1c2491f9402f4aa0565.mockapi.io/products"
+    );
+    setProduct(products.data);
+  };
 
   useEffect(() => {
     // On Mount
-    getData()
-  },[])
+    getData();
+  }, []);
   return {
     products,
-    getData
+    getData,
   };
 }
 

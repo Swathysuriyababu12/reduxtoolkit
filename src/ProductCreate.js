@@ -2,8 +2,11 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { createProduct } from "./slices";
 
+import { useSelector, useDispatch } from "react-redux";
 function ProductCreate() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -38,10 +41,12 @@ function ProductCreate() {
     },
     onSubmit: async (values) => {
       try {
-        await axios.post(
-          `https://64738548d784bccb4a3cb017.mockapi.io/products`,
-          values
-        );
+        // await axios.post(
+        //   `https://64738548d784bccb4a3cb017.mockapi.io/products`,
+        //   values
+        // );
+        dispatch(createProduct(values));
+        console.log(dispatch(createProduct(values)));
         navigate("/products");
       } catch (error) {
         alert("Somethign went wrong");

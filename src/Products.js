@@ -2,16 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import useProduct from "./useProduct";
 import axios from "axios";
-
+import { getmainProducts } from "./slices";
+import { getAllProducts } from "./slices";
+import { useDispatch, useSelector } from "react-redux";
 function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [count, setCount] = useState(0);
   const [count2, setCount2] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // On Mount
     console.log("Product Component Enter");
+    dispatch(getmainProducts());
+    //
 
     return () => {
       // On Destroy
@@ -32,7 +37,9 @@ function Products() {
     console.log(value);
   });
 
-  const { products, getData } = useProduct();
+  // const {products, getData } = useProduct();
+  const { products } = useSelector((state) => state.app);
+  console.log(products);
 
   let search = () => {
     setSearchParams("city=newyork&country=america");
@@ -45,7 +52,7 @@ function Products() {
         await axios.delete(
           `https://6461c1c2491f9402f4aa0565.mockapi.io/products/${id}`
         );
-        getData();
+        dispatch(getmainProducts);
       }
     } catch (error) {
       alert("Something went wrong");
