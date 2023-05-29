@@ -22,25 +22,26 @@ export const getProducts = createSlice({
     error: null,
   },
   reducers: {
-    pro: (state, action) => {
+    fulfilled: (state, action) => {
       state.loading = true;
-    },
-  },
-  extraReducers: {
-    [getAllProducts.pending]: (state) => {
-      state.loading = true;
-    },
-    [getAllProducts.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.singleProduct = [];
       state.products = action.payload;
     },
-    [getAllProducts.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
   },
+  // extraReducers: {
+  //   [getAllProducts.pending]: (state) => {
+  //     state.loading = true;
+  //   },
+  //   [getAllProducts.fulfilled]: (state, action) => {
+  //     state.loading = false;
+  //     state.singleProduct = [];
+  //     state.products = action.payload;
+  //   },
+  //   [getAllProducts.rejected]: (state, action) => {
+  //     state.loading = false;
+  //     state.error = action.payload;
+  //   },
+  // },
 });
 
-export const { pro } = getProducts.actions;
+export const { fulfilled } = getProducts.actions;
 export default getProducts.reducer;

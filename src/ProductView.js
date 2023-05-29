@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts } from "./slices";
-import { pro } from "./slices";
-console.log(pro);
+import { fulfilled } from "./slices";
+console.log(fulfilled);
 
 function ProductView() {
   const { id } = useParams();
@@ -31,7 +31,6 @@ function ProductView() {
     // fetchProductInfo();
     dispatch(getAllProducts(id));
     console.log(dispatch(getAllProducts(id)));
-    console.log(dispatch(pro("hello")));
   }, []);
 
   return (
